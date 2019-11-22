@@ -1,0 +1,52 @@
+
+<div class="container">
+  <div class="row">
+
+    <%= render 'users/list', user: @user_profile,book:@book %>
+
+
+<div class="col-xs-9">
+<h2>Users</h2>
+
+<table class="table">
+  <thead>
+	 <tr>
+	  <th>image</th>
+	  <th>name</th>
+	  <th></th>
+   </tr>
+  </thead>
+
+<tbody>
+
+<% @users.each do |user| %>
+  <tr>
+   <th>
+    <span>
+     <% if user.profile_image %>
+      <%= attachment_image_tag user, :profile_image, :fill, 30, 30, format: 'jpeg' %>
+     <% else %>
+      <%= image_tag "no_image.jpg", size: "30x30" %>
+     <% end %>
+    </span>
+   </th>
+<!--attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg"-->
+
+   <td>
+	<span><%= user.name %></span>
+   </td>
+
+    <td>
+	<%= link_to "show", user_path(user.id) %>
+    </td>
+	<% end %>
+  </tr>
+  <%= paginate @users, class: "paginate" %>
+
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+</main>
